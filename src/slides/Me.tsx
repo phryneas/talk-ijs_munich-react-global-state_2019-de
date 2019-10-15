@@ -4,7 +4,7 @@ import { MayflowerLogo } from "./assets";
 
 export const Me = () => (
   <Section>
-    <Title>About me</Title>
+    <Title>Der Typ da vorne</Title>
     <List>
       <Item>
         Lenz Weber <br />(<em>@phry</em> bei Twitter, <em>phryneas</em> überall
@@ -12,7 +12,7 @@ export const Me = () => (
       </Item>
 
       <Item>
-        seit 2015 Developer/DevOps/Dev🥑 bei
+        seit 2015 Developer/DevOps/Dev-🥑 bei
         <img
           src={MayflowerLogo}
           style={{
@@ -23,10 +23,10 @@ export const Me = () => (
         />
       </Item>
       <Item>php: seit php4 (2003-ish)</Item>
-      <Item>ernsthaftes JavaScript: seit 2013</Item>
+      <Item>"ernsthaft" JavaScript: seit 2013</Item>
       <Item>React: seit 2016</Item>
       <Item>
-        aktuell aktiv in OpenSource:
+        aktuell aktiv in OpenSource-Projekten:
         <List>
           <Item>fork-ts-checker-webpack-plugin</Item>
           <Item>redux-starter-kit</Item>

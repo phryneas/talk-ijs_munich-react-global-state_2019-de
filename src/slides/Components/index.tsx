@@ -1,12 +1,14 @@
 import styled from "@emotion/styled";
 import React, { CSSProperties } from "react";
 
-export const Section = styled.section<{ type?: "title" | "content" }>(
-  ({ type = "content" }) => ({
+export { PieChart } from "./PieChart";
+
+export const Section = styled.section<{ type?: "spread" | "content" }>(
+  ({ type = "spread" }) => ({
     flexGrow: 1,
     display: "flex",
     flexDirection: "column",
-    justifyContent: type === "title" ? "center" : "flex-start", // oder space-evenly
+    justifyContent: type === "spread" ? "space-evenly" : "flex-start",
     alignItems: "left",
     overflow: "hidden",
     fontSize: "1.5rem"
@@ -23,6 +25,7 @@ export const SubTitle = styled.h2({
   alignSelf: "center",
   textAlign: "center"
 });
+export const Paragraph = styled.p({});
 
 export const List = styled.ul({
   listStyleType: "disc !important",
@@ -43,10 +46,10 @@ export const Image = styled(
     style?: CSSProperties;
   }) => {
     return (
-      <div className={className}>
+      <figure className={className}>
         <img src={src} style={style} />
         {caption && <figcaption>{caption}</figcaption>}
-      </div>
+      </figure>
     );
   }
 )({
