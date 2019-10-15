@@ -33,6 +33,8 @@ export const List = styled.ul({
 });
 export const Item = styled.li({});
 
+export const Comment: React.FC = () => <></>;
+
 export const Image = styled(
   ({
     className,

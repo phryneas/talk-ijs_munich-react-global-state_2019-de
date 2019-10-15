@@ -5,11 +5,16 @@ import {
   SubTitle,
   Image,
   PieChart,
-  Paragraph
+  Paragraph,
+  Comment
 } from "./Components";
 import { Slides } from "./Slides";
 import { Me } from "./Me";
 import { Wollmilchsau } from "./assets";
+
+function c(args: TemplateStringsArray) {
+  return <Comment />;
+}
 
 const stateChart = [
   { label: "authentication", value: 2 },
@@ -78,49 +83,52 @@ export function SlideDeck({
         </Title>
         <PieChart hideValue data={stateChart} />
       </Section>
+      <Section>
+        <Title>
+          Aber es gibt doch <em>gute Gründe</em>, das alles in den globalen
+          State zu packen!
+        </Title>
+      </Section>
+      <Section>
+        <Title>#guteGründe</Title>
+        <Title>Time Travel</Title>
+        {c`
+          * nur möglich, wenn man alles in den global State packt, worüber getravelled werden sollt 
+          * macht kaum jemand 
+          * können Redux/MST auch gar nicht von Haus aus (haben aber die Veranlagung dazu)
+          `}
+      </Section>
+      <Section>
+        <Title>#guteGründe</Title>
+        <Title>State (de)-serialisieren und irgendwohin wegsichern</Title>
+        {c`
+          * sollte man vielleicht nicht mit dem ganzen State machen, ist aber valide
+          * wer macht das alles?
+          `}
+      </Section>
+      <Section>
+        <Title>#guteGründe</Title>
+        <Title>Trennen von Business-Logik und (dummen) Komponenten</Title>
+        {c`
+          * ja. JA! Dafür nutzt man Redux. Aber die meisten nutzen Redux & Co nur für getter/setter.
+          `}
+      </Section>
+      <Section>
+        <Title>#guteGründe</Title>
+        <Title>Gewohnheit</Title>
+        {c`
+          * früher die beste, weil einzige Wahl (seit Mixins entfernt wurden)
+          `}
+      </Section>
+      <Section>
+        <Title>#guteGründe</Title>
+        <Title>Architektur</Title>
+        {c`
+          * nicht jeder Fitzel State sollte zur Architektur beitragen.
+          Wenn man den kompletten State einer Applikation von vorneherein plant gibt man sich Implementierungsdetails vor, 
+          die später an der Realität scheitern.      
+          `}
+      </Section>
     </Slides>
   );
 }
-
-/* 
-Schaut man sich um, wie man State in React-Applikationen handelt, findet man vor allem drei große Namen:
-* Redux
-* MobX / MobX State Tree
-* React Context
-
-die ersten beiden (und mit Einschränkung auch der Dritte) werden für das handeln von globalem State genutzt.
-
-Und das sehr häufig viel zu viel.
-
-Schauen wir also erst mal, die Argumente "pro" globalen State an:
-
-* Time Travel
-  -> ist nicht fester Teil dieser Bibliotheken, sondern nur einfach mit ihnen. Wer nutzt das wirklich im Raum?  
-
-* State serialisierung/deserialisierung
-  -> sollte man vielleicht nicht mit dem ganzen State machen, ist aber valide
-
-* Trennen von Business-Logik und Komponenten
-  -> ja. JA! Dafür nutzt man Redux. Aber die meisten nutzen Redux & Co nur für getter/setter.
-
-* Geschichte/Gewohnheit
-  -> früher die beste, weil einzige Wahl (seit Mixins entfernt wurden)
-
-* Architektur
-  -> nicht jeder Fitzel State sollte zur Architektur beitragen.
-    Wenn man den kompletten State einer Applikation von vorneherein plant gibt man sich Implementierungsdetails vor, die später an der Realität scheitern.
-
-=> wenn man diese Sachen nutzt, kann es sinnvoll sein, auch diese Sachen im global State zu lassen. Aber in den seltensten Fällen machen diese Anwendungsfälle den ganzen global State aus.
-Was also mit dem Rest?
-
-State-Typen:
-
-  * Navigation-State
-  * Formular-State
-  * Cache-State
-  * UI-State
-  * Session-State
-  * Settings-State
-
-
-*/
