@@ -1,11 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
 import styled from "@emotion/styled";
-import {
-  useLocalSlice,
-  PayloadAction,
-  PayloadActionDispatch
-} from "use-local-slice";
+import { useLocalSlice, PayloadAction } from "use-local-slice";
 import { MayflowerLogo } from "./assets";
 
 const SlideCtx = React.createContext({
@@ -23,7 +19,7 @@ export function SlideDeck({ children }: React.PropsWithChildren<{}>) {
   return <>{childArray[slide]}</>;
 }
 
-export const Slides = React.memo(function Slides({
+export function Slides({
   children,
   initialSlide = 1,
   initialOpen = false
@@ -32,9 +28,7 @@ export const Slides = React.memo(function Slides({
     initialOpen,
     initialSlide
   });
-  usePropChangesOverrideSlideNumber(initialSlide, dispatch.setSlide);
   useKeyboardNavigation(dispatch);
-  useEffect(() => console.log("first render"), []);
 
   return (
     <SlidePortal>
@@ -52,7 +46,7 @@ export const Slides = React.memo(function Slides({
       </Dialog>
     </SlidePortal>
   );
-});
+}
 
 function useSlideState({
   initialSlide,
@@ -62,7 +56,7 @@ function useSlideState({
   initialOpen: boolean;
 }) {
   return useLocalSlice({
-    initialState: { slide: initialSlide, open: initialOpen, totalCount: 0 },
+    initialState: { slide: initialSlide - 1, open: initialOpen, totalCount: 0 },
     reducers: {
       lastSlide(draft) {
         draft.slide = Math.max(0, draft.slide - 1);
@@ -81,13 +75,6 @@ function useSlideState({
       }
     }
   });
-}
-
-function usePropChangesOverrideSlideNumber(
-  initialSlide: number,
-  setSlide: PayloadActionDispatch<number>
-) {
-  React.useEffect(() => setSlide(initialSlide), [initialSlide, setSlide]);
 }
 
 function useKeyboardNavigation(dispatch: ReturnType<typeof useSlideState>[1]) {

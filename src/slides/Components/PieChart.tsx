@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 import { ChartProvider, ArcSeries, Arc, Tooltip } from "rough-charts";
 
 const colors = [
