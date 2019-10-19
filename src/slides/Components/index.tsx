@@ -49,7 +49,7 @@ export const Image = styled(
   }) => {
     return (
       <figure className={className}>
-        <img src={src} style={style} />
+        <img src={src} alt={caption} style={style} />
         {caption && <figcaption>{caption}</figcaption>}
       </figure>
     );

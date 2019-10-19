@@ -8,7 +8,7 @@ import {
   Paragraph,
   Comment
 } from "./Components";
-import { Slides } from "./Slides";
+import { SlideDeck } from "./Slides";
 import { Me } from "./Me";
 import { Wollmilchsau } from "./assets";
 
@@ -17,20 +17,18 @@ function c(args: TemplateStringsArray) {
 }
 
 const stateChart = [
-  { label: "authentication", value: 2 },
-  { label: "configuration", value: 3 },
+  { label: "app-config", value: 2 },
+  { label: "authentication", value: 3 },
+  { label: "options", value: 3 },
   { label: "api-cache", value: 30 },
   { label: "formulare", value: 20 },
-  { label: "ui-state", value: 30 },
+  { label: "ui-state", value: 27 },
   { label: "navigation", value: 15 }
 ];
 
-export function SlideDeck({
-  children: _omit,
-  ...props
-}: React.ComponentProps<typeof Slides>) {
+export function IjsMucSlideDeck() {
   return (
-    <Slides {...props}>
+    <SlideDeck>
       <Section>
         <div>
           <Title>
@@ -72,8 +70,9 @@ export function SlideDeck({
         <PieChart
           hideValue
           data={[
-            { label: "global", value: 5 },
-            { label: "nicht-global", value: 95 }
+            { label: "global", value: 6 },
+            { label: "gar kein State", value: 2 },
+            { label: "nicht-global", value: 92 }
           ]}
         />
       </Section>
@@ -88,6 +87,31 @@ export function SlideDeck({
           Aber es gibt doch <em>gute Gründe</em>, das alles in den globalen
           State zu packen!
         </Title>
+      </Section>
+      <Section>
+        <Title>#guteGründe</Title>
+        <Title>Alles von überall erreichbar</Title>
+        {c`
+          * nicht nur Segen, sondern auch Fluch:
+            * Verantwortlichkeiten werden aufgegeben, sowohl im Code als auch in der Kommunikation unter Entwicklern.
+            * überall anders versuchen wir ja auch, Globalen zu vermeiden, bezeichnen Singletons als Antipattern.
+          `}
+      </Section>
+      <Section>
+        <Title>#guteGründe</Title>
+        <Title>Trennen von Business-Logik und (dummen) Komponenten</Title>
+        {c`
+          * ja. JA! Dafür nutzt man Redux. Aber die meisten nutzen Redux & Co nur für getter/setter.
+          `}
+      </Section>
+      <Section>
+        <Title>#guteGründe</Title>
+        <Title>Architektur</Title>
+        {c`
+          * nicht jeder Fitzel State sollte zur Architektur beitragen.
+          Wenn man den kompletten State einer Applikation von vorneherein plant gibt man sich Implementierungsdetails vor, 
+          die später an der Realität scheitern.      
+          `}
       </Section>
       <Section>
         <Title>#guteGründe</Title>
@@ -108,27 +132,11 @@ export function SlideDeck({
       </Section>
       <Section>
         <Title>#guteGründe</Title>
-        <Title>Trennen von Business-Logik und (dummen) Komponenten</Title>
-        {c`
-          * ja. JA! Dafür nutzt man Redux. Aber die meisten nutzen Redux & Co nur für getter/setter.
-          `}
-      </Section>
-      <Section>
-        <Title>#guteGründe</Title>
         <Title>Gewohnheit</Title>
         {c`
-          * früher die beste, weil einzige Wahl (seit Mixins entfernt wurden)
+          * früher die beste, weil einzige Wahl (seit Mixins entfernt wurden), um Asynchronitäten gut zu managen
           `}
       </Section>
-      <Section>
-        <Title>#guteGründe</Title>
-        <Title>Architektur</Title>
-        {c`
-          * nicht jeder Fitzel State sollte zur Architektur beitragen.
-          Wenn man den kompletten State einer Applikation von vorneherein plant gibt man sich Implementierungsdetails vor, 
-          die später an der Realität scheitern.      
-          `}
-      </Section>
-    </Slides>
+    </SlideDeck>
   );
 }

@@ -12,8 +12,13 @@ export const Me = () => (
       </Item>
 
       <Item>
-        seit 2015 Developer/DevOps/Dev-🥑 bei
+        seit 2015 Developer/DevOps/Dev-
+        <span aria-label="Avocado" role="img">
+          🥑
+        </span>{" "}
+        bei
         <img
+          alt="Mayflower"
           src={MayflowerLogo}
           style={{
             display: "inline",
@@ -31,6 +36,7 @@ export const Me = () => (
           <Item>fork-ts-checker-webpack-plugin</Item>
           <Item>redux-starter-kit</Item>
           <Item>react-async (bald: async-library)</Item>
+          <Item>postgraphile</Item>
         </List>
       </Item>
     </List>

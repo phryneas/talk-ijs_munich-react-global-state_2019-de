@@ -1,11 +1,14 @@
 import React from "react";
-import { SlideDeck } from "./slides/IjsMuc";
+import { IjsMucSlideDeck } from "./slides/IjsMuc";
+import { Slides } from "./slides/Slides";
 
 function App() {
   return (
     <div>
       qwe
-      <SlideDeck initialSlide={1} initialOpen />
+      <Slides initialSlide={1} initialOpen>
+        <IjsMucSlideDeck />
+      </Slides>
     </div>
   );
 }
