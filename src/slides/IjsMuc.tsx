@@ -157,6 +157,7 @@ export function IjsMucSlideDeck() {
       <Section>
         derived State gehört meistens in Komponenten, nicht in den State!
       </Section>
+      <Section>das ist jetzt ja schon alles sehr auf hooks ausgelegt!</Section>
     </SlideDeck>
   );
 }
