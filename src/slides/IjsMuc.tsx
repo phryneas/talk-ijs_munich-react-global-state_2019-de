@@ -5,7 +5,6 @@ import {
   SubTitle,
   Image,
   PieChart,
-  Paragraph,
   Comment
 } from "./Components";
 import { SlideDeck } from "./Slides";
@@ -16,14 +15,24 @@ function c(args: TemplateStringsArray) {
   return <Comment />;
 }
 
+enum StateLabels {
+  appConfig = "App-Config",
+  authentication = "Authentication",
+  options = "Optionen",
+  apiCache = "API Cache",
+  forms = "Formulare",
+  uiState = "UI-State",
+  navigation = "Navigation"
+}
+
 const stateChart = [
-  { label: "app-config", value: 2 },
-  { label: "authentication", value: 3 },
-  { label: "options", value: 3 },
-  { label: "api-cache", value: 30 },
-  { label: "formulare", value: 20 },
-  { label: "ui-state", value: 27 },
-  { label: "navigation", value: 15 }
+  { label: StateLabels.appConfig, value: 2 },
+  { label: StateLabels.authentication, value: 3 },
+  { label: StateLabels.options, value: 3 },
+  { label: StateLabels.apiCache, value: 30 },
+  { label: StateLabels.forms, value: 20 },
+  { label: StateLabels.uiState, value: 27 },
+  { label: StateLabels.navigation, value: 15 }
 ];
 
 export function IjsMucSlideDeck() {
@@ -137,6 +146,33 @@ export function IjsMucSlideDeck() {
           * früher die beste, weil einzige Wahl (seit Mixins entfernt wurden), um Asynchronitäten gut zu managen
           `}
       </Section>
+      <StateHeader label={StateLabels.appConfig} />
+      <StateHeader label={StateLabels.apiCache} />
+      <StateHeader label={StateLabels.uiState} />
+      <StateHeader label={StateLabels.forms} text="Formularen" />
+      <StateHeader label={StateLabels.navigation} />
+
+      <StateHeader label={StateLabels.authentication} />
+      <StateHeader label={StateLabels.options} />
+      <Section>
+        derived State gehört meistens in Komponenten, nicht in den State!
+      </Section>
     </SlideDeck>
+  );
+}
+
+function StateHeader({
+  label,
+  text = label
+}: {
+  label: StateLabels;
+  text?: string;
+}) {
+  return (
+    <Section>
+      <Title>Was mache ich dann mit...?</Title>
+      <SubTitle>{text}</SubTitle>
+      <PieChart hideValue data={stateChart} highlighted={[label]} />
+    </Section>
   );
 }

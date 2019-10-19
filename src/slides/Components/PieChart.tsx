@@ -25,8 +25,8 @@ export function PieChart({
   data,
   highlighted = [],
   hideValue,
-  width = 300,
-  height = 300
+  width = 360,
+  height = 360
 }: {
   data: Array<ChartItem>;
   highlighted?: string[];
@@ -47,7 +47,7 @@ export function PieChart({
           )}
           height={height}
           width={width}
-          margin={{ left: 5, top: 5, right: 5, bottom: 5 }}
+          margin={{ left: 30, top: 30, right: 30, bottom: 30 }}
         >
           >
           <ArcSeries dataKey="value" padAngle={Math.PI / 20}>
