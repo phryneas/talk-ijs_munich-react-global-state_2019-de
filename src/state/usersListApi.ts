@@ -3,7 +3,7 @@ import { AppThunk } from ".";
 import { LOCATION_CHANGE, push } from "connected-react-router";
 import { matchPath, generatePath } from "react-router";
 
-interface User {
+export interface User {
   id: number;
   email: string;
   first_name: string;
@@ -108,7 +108,8 @@ export function navigateTo(page: number) {
 }
 
 export const selectors = {
-  status: (state: UsersState) => state.status,
+  isLoading: (state: UsersState) => state.status === ApiStatus.loading,
+  isLoaded: (state: UsersState) => state.status === ApiStatus.loaded,
   users: (state: UsersState) =>
     state.status === ApiStatus.loaded || state.status === ApiStatus.loading
       ? state.users

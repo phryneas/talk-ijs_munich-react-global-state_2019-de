@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+import React, { useEffect, useContext } from "react";
 import { useAppSelector, fromUsersList } from "../state";
 import {
   Paper,
@@ -15,10 +17,15 @@ import {
   ApiStatus,
   loadUsersThunk as loadUsers,
   selectors as select,
-  navigateTo
+  navigateTo,
+  User,
+  PATH_MATCH
 } from "../state/usersListApi";
 import clsx from "clsx";
 import { useDispatch } from "react-redux";
+
+import { useFetch } from "react-async";
+import { useParams, useHistory, generatePath } from "react-router";
 
 const useStyles = makeStyles({
   paper: {
@@ -33,7 +40,8 @@ const useStyles = makeStyles({
 });
 
 export function UsersList(props: React.Props<{}>) {
-  const status = useAppSelector(fromUsersList(select.status));
+  const isLoading = useAppSelector(fromUsersList(select.isLoading));
+  const isLoaded = useAppSelector(fromUsersList(select.isLoaded));
   const users = useAppSelector(fromUsersList(select.users));
   const error = useAppSelector(fromUsersList(select.error));
   const page = useAppSelector(fromUsersList(select.page));
@@ -45,6 +53,17 @@ export function UsersList(props: React.Props<{}>) {
       dispatch(loadUsers(page));
     }
   }, [dispatch, page]);
+
+  function navigateToLastPage() {
+    if (page) {
+      dispatch(navigateTo(page - 1));
+    }
+  }
+  function navigateToNextPage() {
+    if (page) {
+      dispatch(navigateTo(page + 1));
+    }
+  }
 
   return (
     <Paper className={classes.paper}>
@@ -60,11 +79,11 @@ export function UsersList(props: React.Props<{}>) {
         <TableBody>
           {(users &&
             users.length > 0 &&
-            users.map(user => (
+            users.map((user: User) => (
               <TableRow
                 key={user.id}
                 className={clsx({
-                  [classes.loading]: status === ApiStatus.loading
+                  [classes.loading]: isLoading
                 })}
               >
                 <TableCell component="th" scope="row">
@@ -77,9 +96,9 @@ export function UsersList(props: React.Props<{}>) {
             ))) || (
             <TableRow className={classes.loading}>
               <TableCell rowSpan={4} component="th" scope="row">
-                {status === ApiStatus.loading ? (
+                {isLoading ? (
                   "loading"
-                ) : status === ApiStatus.loaded ? (
+                ) : isLoaded ? (
                   "no data"
                 ) : error ? (
                   <>Error: {error}</>
@@ -93,11 +112,9 @@ export function UsersList(props: React.Props<{}>) {
       </Table>
       {page && (
         <Typography>
-          <Button onClick={() => dispatch(navigateTo(page - 1))}>back</Button>
+          <Button onClick={navigateToLastPage}>back</Button>
           Page {page}
-          <Button onClick={() => dispatch(navigateTo(page + 1))}>
-            forward
-          </Button>
+          <Button onClick={navigateToNextPage}>forward</Button>
         </Typography>
       )}
     </Paper>

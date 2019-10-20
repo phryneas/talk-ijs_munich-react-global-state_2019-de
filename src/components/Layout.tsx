@@ -28,7 +28,7 @@ export default function Layout({
   title: React.ReactNode;
   buttons: React.ReactNode;
 }>) {
-  const classes = useStyles();
+  const classes = useStyles({});
 
   return (
     <div className={classes.root}>

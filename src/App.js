@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import React from "react";
 import Layout from "./components/Layout";
 import { Button } from "@material-ui/core";
@@ -7,6 +9,7 @@ import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import { NewUser } from "./components/NewUser";
 import { Route, Switch, Redirect, generatePath } from "react-router";
+import { BrowserRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { PATH_MATCH } from "./state/usersListApi";
 

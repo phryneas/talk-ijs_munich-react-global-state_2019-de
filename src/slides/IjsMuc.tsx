@@ -193,7 +193,7 @@ export function IjsMucSlideDeck() {
       <Section>
         <SubTitle>Achja:</SubTitle>
         <Title>Wir heuern an!</Title>
-        <img src={MayflowerLogo} style={{ height: "15%" }} />
+        <img alt="Mayflower" src={MayflowerLogo} style={{ height: "15%" }} />
       </Section>
     </SlideDeck>
   );
