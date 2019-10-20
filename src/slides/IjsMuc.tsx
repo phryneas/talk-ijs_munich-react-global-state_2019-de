@@ -5,11 +5,12 @@ import {
   SubTitle,
   Image,
   PieChart,
-  Comment
+  Comment,
+  Paragraph
 } from "./Components";
 import { SlideDeck } from "./Slides";
 import { Me } from "./Me";
-import { Wollmilchsau } from "./assets";
+import { Wollmilchsau, MayflowerLogo } from "./assets";
 
 function c(args: TemplateStringsArray) {
   return <Comment />;
@@ -155,9 +156,45 @@ export function IjsMucSlideDeck() {
       <StateHeader label={StateLabels.authentication} />
       <StateHeader label={StateLabels.options} />
       <Section>
-        derived State gehört meistens in Komponenten, nicht in den State!
+        <Title>Fast vergessen</Title>
+        Derived State gehört meistens in Komponenten, nicht in den State!
       </Section>
-      <Section>das ist jetzt ja schon alles sehr auf hooks ausgelegt!</Section>
+      <Section>
+        <Title>Schön und gut...</Title>
+      </Section>
+      <Section>
+        <Title>
+          Das ist jetzt ja schon alles sehr auf Hooks ausgelegt, oder?
+        </Title>
+      </Section>
+      <Section>
+        <Title>Und...Tests?!?</Title>
+        <SubTitle>Vorher konnte man doch so schön die Reducer testen!</SubTitle>
+        <Paragraph>
+          (...das Zusammenspiel mit 20 Middlewares besser mal nicht...)
+        </Paragraph>
+      </Section>
+      <Section>
+        <Title>Nochmal zurück:</Title>
+        <SubTitle>#GuteGründe</SubTitle>
+        <Paragraph>Gibt es wirklich.</Paragraph>
+        <Paragraph>Nur nicht immer.</Paragraph>
+        <SubTitle>
+          Ich kann hier nur anregen, ich will euch nichts vorschreiben!
+        </SubTitle>
+      </Section>
+      <Section>
+        <Title>Das wars.</Title>
+      </Section>
+      <Section>
+        <Title>Fragen und Antworten</Title>
+        <SubTitle>Grillt mich ;)</SubTitle>
+      </Section>
+      <Section>
+        <SubTitle>Achja:</SubTitle>
+        <Title>Wir heuern an!</Title>
+        <img src={MayflowerLogo} style={{ height: "15%" }} />
+      </Section>
     </SlideDeck>
   );
 }

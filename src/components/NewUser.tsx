@@ -4,6 +4,17 @@ import { useAppSelector, fromNewUserForm } from "../state";
 import { selectors as select, submitForm, actions } from "../state/newUserForm";
 import { useDispatch } from "react-redux";
 import { TextField, Button, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles({
+  form: {
+    maxWidth: "500px",
+    marginLeft: "auto",
+    marginRight: "auto",
+    display: "flex",
+    flexDirection: "column"
+  }
+});
 
 export function NewUser(props: React.Props<{}>) {
   const name = useAppSelector(fromNewUserForm(select.name));
@@ -13,8 +24,11 @@ export function NewUser(props: React.Props<{}>) {
 
   const dispatch = useDispatch();
 
+  const classes = useStyles(props);
+
   return (
     <form
+      className={classes.form}
       onSubmit={e => {
         e.preventDefault();
         dispatch(submitForm());
@@ -26,12 +40,12 @@ export function NewUser(props: React.Props<{}>) {
         </Typography>
       )}
       <TextField
-        label="name"
+        label="Name"
         value={name}
         onChange={e => dispatch(actions.nameChanged(e.target.value))}
       />
       <TextField
-        label="job"
+        label="Job"
         value={job}
         onChange={e => dispatch(actions.jobChanged(e.target.value))}
       />

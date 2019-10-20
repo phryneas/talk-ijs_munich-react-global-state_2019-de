@@ -9,7 +9,7 @@ export const Section = styled.section<{ type?: "spread" | "content" }>(
     display: "flex",
     flexDirection: "column",
     justifyContent: type === "spread" ? "space-evenly" : "flex-start",
-    alignItems: "left",
+    alignItems: type === "spread" ? "center" : "left",
     overflow: "hidden",
     fontSize: "1.5rem"
   })
