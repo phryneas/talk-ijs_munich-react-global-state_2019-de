@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "redux-starter-kit";
+import { createSlice, PayloadAction, createSelector } from "redux-starter-kit";
 import { AppThunk } from ".";
 
 interface User {
@@ -17,52 +17,56 @@ interface ApiResult {
   data: User[];
 }
 
-enum Status {
+export enum ApiStatus {
   uninitialized,
   loading,
   loaded,
   error
 }
 
-type UsersState =
-  | { status: Status.uninitialized }
-  | { status: Status.loading; users?: User[]; currentPage: number }
-  | { status: Status.error; error: string }
+export type UsersState =
+  | { status: ApiStatus.uninitialized }
+  | { status: ApiStatus.loading; users?: User[]; currentPage: number }
+  | { status: ApiStatus.error; error: string }
   | {
-      status: Status.loaded;
+      status: ApiStatus.loaded;
       users: User[];
       currentPage: number;
     };
 
-export const userSlice = createSlice({
+export const userListSlice = createSlice({
   name: "usersApi",
-  initialState: { status: Status.uninitialized } as UsersState,
+  initialState: { status: ApiStatus.uninitialized } as UsersState,
   reducers: {
     loadingStarted(oldState, { payload: page }: PayloadAction<number>) {
       return {
-        status: Status.loading,
+        status: ApiStatus.loading,
         currentPage: page,
         // keep old users in state until loading of new users completed
-        users: oldState.status === Status.loaded ? oldState.users : undefined
+        users: oldState.status === ApiStatus.loaded ? oldState.users : undefined
       };
     },
     loaded(_, { payload: apiResult }: PayloadAction<ApiResult>) {
       return {
-        status: Status.loaded,
+        status: ApiStatus.loaded,
         users: apiResult.data,
         currentPage: apiResult.page
       };
     },
     hadError(_, { payload: error }: PayloadAction<string>) {
       return {
-        status: Status.error,
+        status: ApiStatus.error,
         error
       };
     }
   }
 });
 
-export const { actions } = userSlice;
+export const { actions } = userListSlice;
+
+function waitForShow(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 export function loadUsersThunk(page: number): AppThunk {
   return async (dispatch, getState) => {
@@ -73,9 +77,21 @@ export function loadUsersThunk(page: number): AppThunk {
       if (!result.ok) {
         throw result.statusText;
       }
+      await waitForShow(500);
       dispatch(actions.loaded(await result.json()));
     } catch (e) {
       dispatch(actions.hadError(e.message || e.toString()));
     }
   };
 }
+
+export const selectors = {
+  status: (state: UsersState) => state.status,
+  users: (state: UsersState) =>
+    state.status === ApiStatus.loaded || state.status === ApiStatus.loading
+      ? state.users
+      : undefined,
+  page: (state: UsersState) =>
+    state.status === ApiStatus.loaded && state.currentPage,
+  error: (state: UsersState) => state.status === ApiStatus.error && state.error
+};
