@@ -25,6 +25,7 @@ import clsx from "clsx";
 import { useDispatch } from "react-redux";
 
 import { useFetch } from "react-async";
+import { ApiBaseCtx } from "..";
 import { useParams, useHistory, generatePath } from "react-router";
 
 const useStyles = makeStyles({
@@ -40,30 +41,24 @@ const useStyles = makeStyles({
 });
 
 export function UsersList(props: React.Props<{}>) {
-  const isLoading = useAppSelector(fromUsersList(select.isLoading));
-  const isLoaded = useAppSelector(fromUsersList(select.isLoaded));
-  const users = useAppSelector(fromUsersList(select.users));
-  const error = useAppSelector(fromUsersList(select.error));
-  const page = useAppSelector(fromUsersList(select.page));
+  const { page = "1" } = useParams();
   const classes = useStyles(props);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (typeof page !== "undefined") {
-      dispatch(loadUsers(page));
-    }
-  }, [dispatch, page]);
+  const apiBase = useContext(ApiBaseCtx);
+  const history = useHistory();
 
   function navigateToLastPage() {
-    if (page) {
-      dispatch(navigateTo(page - 1));
-    }
+    history.push(generatePath(PATH_MATCH, { page: Number.parseInt(page) - 1 }));
   }
   function navigateToNextPage() {
-    if (page) {
-      dispatch(navigateTo(page + 1));
-    }
+    history.push(generatePath(PATH_MATCH, { page: Number.parseInt(page) + 1 }));
   }
+
+  const {
+    data: { data: users = [] } = {},
+    isLoading,
+    error,
+    isFulfilled: isLoaded
+  } = useFetch<any>(`${apiBase}/users?page=${page}`, {}, { json: true });
 
   return (
     <Paper className={classes.paper}>

@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/styles";
 
 import { useFormik } from "formik";
 import { useFetch } from "react-async";
+import { ApiBaseCtx } from "..";
 import { navigateTo, PATH_MATCH } from "../state/usersListApi";
 import { useHistory, generatePath } from "react-router";
 
@@ -23,39 +24,45 @@ const useStyles = makeStyles({
 });
 
 export function NewUser(props: React.Props<{}>) {
-  const name = useAppSelector(fromNewUserForm(select.name));
-  const job = useAppSelector(fromNewUserForm(select.job));
-  const isSubmitting = useAppSelector(fromNewUserForm(select.isSubmitting));
-  const error = useAppSelector(fromNewUserForm(select.error));
+  const history = useHistory();
+  const apiBase = useContext(ApiBaseCtx);
 
-  const dispatch = useDispatch();
+  const { error, run } = useFetch<any>(
+    `${apiBase}/users`,
+    {
+      method: "POST"
+    },
+    {
+      defer: true,
+      json: true,
+      onResolve() {
+        history.push(generatePath(PATH_MATCH, { page: 1 }));
+      }
+    }
+  );
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      job: ""
+    },
+    onSubmit() {
+      run(init => ({ ...init, body: JSON.stringify(formik.values) }));
+    }
+  });
 
   const classes = useStyles(props);
 
   return (
-    <form
-      className={classes.form}
-      onSubmit={e => {
-        e.preventDefault();
-        dispatch(submitForm());
-      }}
-    >
+    <form className={classes.form} onSubmit={formik.handleSubmit}>
       {error && (
         <Typography variant="subtitle1" color="error">
           {error}
         </Typography>
       )}
-      <TextField
-        label="Name"
-        value={name}
-        onChange={e => dispatch(actions.nameChanged(e.target.value))}
-      />
-      <TextField
-        label="Job"
-        value={job}
-        onChange={e => dispatch(actions.jobChanged(e.target.value))}
-      />
-      <Button type="submit" disabled={isSubmitting}>
+      <TextField label="Name" {...formik.getFieldProps({ name: "name" })[0]} />
+      <TextField label="Job" {...formik.getFieldProps({ name: "job" })[0]} />
+      <Button type="submit" disabled={formik.isSubmitting}>
         Submit
       </Button>
     </form>

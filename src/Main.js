@@ -8,7 +8,7 @@ function Main({ store, history }) {
   return (
     <div>
       <Wrapper>
-        <App store={store} history={history} />
+        <App />
       </Wrapper>
       <Slides initialSlide={1} initialOpen>
         <IjsMucSlideDeck />

@@ -3,14 +3,12 @@ import ReactDOM from "react-dom";
 import Main from "./Main";
 
 import "modern-css-reset";
-import { createBrowserHistory } from "history";
-import { createStore } from "./state";
 
-export const history = createBrowserHistory();
-
-const store = createStore({ history, apiBase: "https://reqres.in/api" });
+export const ApiBaseCtx = React.createContext();
 
 ReactDOM.render(
-  <Main history={history} store={store} />,
+  <ApiBaseCtx.Provider value={"https://reqres.in/api"}>
+    <Main />
+  </ApiBaseCtx.Provider>,
   document.getElementById("root")
 );

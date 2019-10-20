@@ -13,35 +13,33 @@ import { BrowserRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { PATH_MATCH } from "./state/usersListApi";
 
-export function App({ store, history }) {
+export function App() {
   const page1Link = generatePath(PATH_MATCH, { page: 1 });
   return (
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <Layout
-          title="Demo"
-          buttons={
-            <>
-              <Link to="/new">
-                <Button>New</Button>
-              </Link>
-              <Link to={page1Link}>
-                <Button>List</Button>
-              </Link>
-            </>
-          }
-        >
-          <Switch>
-            <Route path="/new" exact>
-              <NewUser />
-            </Route>
-            <Route path={PATH_MATCH}>
-              <UsersList />
-            </Route>
-            <Redirect to={page1Link} />
-          </Switch>
-        </Layout>
-      </ConnectedRouter>
-    </Provider>
+    <BrowserRouter>
+      <Layout
+        title="Demo"
+        buttons={
+          <>
+            <Link to="/new">
+              <Button>New</Button>
+            </Link>
+            <Link to={page1Link}>
+              <Button>List</Button>
+            </Link>
+          </>
+        }
+      >
+        <Switch>
+          <Route path="/new" exact>
+            <NewUser />
+          </Route>
+          <Route path={PATH_MATCH}>
+            <UsersList />
+          </Route>
+          <Redirect to={page1Link} />
+        </Switch>
+      </Layout>
+    </BrowserRouter>
   );
 }
