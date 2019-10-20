@@ -4,11 +4,11 @@ import { Slides } from "./slides/Slides";
 import { hot } from "react-hot-loader/root";
 import { App } from "./App";
 
-function Main() {
+function Main({ store, history }) {
   return (
     <div>
       <Wrapper>
-        <App />
+        <App store={store} history={history} />
       </Wrapper>
       <Slides initialSlide={1} initialOpen>
         <IjsMucSlideDeck />

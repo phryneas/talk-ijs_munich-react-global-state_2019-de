@@ -14,7 +14,8 @@ import {
 import {
   ApiStatus,
   loadUsersThunk as loadUsers,
-  selectors as select
+  selectors as select,
+  navigateTo
 } from "../state/usersListApi";
 import clsx from "clsx";
 import { useDispatch } from "react-redux";
@@ -40,10 +41,10 @@ export function UsersList(props: React.Props<{}>) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (status === ApiStatus.uninitialized) {
-      dispatch(loadUsers(0));
+    if (typeof page !== "undefined") {
+      dispatch(loadUsers(page));
     }
-  }, [status, dispatch]);
+  }, [dispatch, page]);
 
   return (
     <Paper className={classes.paper}>
@@ -92,9 +93,11 @@ export function UsersList(props: React.Props<{}>) {
       </Table>
       {page && (
         <Typography>
-          <Button onClick={() => dispatch(loadUsers(page - 1))}>back</Button>
+          <Button onClick={() => dispatch(navigateTo(page - 1))}>back</Button>
           Page {page}
-          <Button onClick={() => dispatch(loadUsers(page + 1))}>forward</Button>
+          <Button onClick={() => dispatch(navigateTo(page + 1))}>
+            forward
+          </Button>
         </Typography>
       )}
     </Paper>

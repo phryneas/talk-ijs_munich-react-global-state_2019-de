@@ -1,5 +1,7 @@
-import { createSlice, PayloadAction, createSelector } from "redux-starter-kit";
+import { createSlice, PayloadAction } from "redux-starter-kit";
 import { AppThunk } from ".";
+import { LOCATION_CHANGE, push } from "connected-react-router";
+import { matchPath, generatePath } from "react-router";
 
 interface User {
   id: number;
@@ -25,14 +27,16 @@ export enum ApiStatus {
 }
 
 export type UsersState =
-  | { status: ApiStatus.uninitialized }
+  | { status: ApiStatus.uninitialized; currentPage?: number }
   | { status: ApiStatus.loading; users?: User[]; currentPage: number }
-  | { status: ApiStatus.error; error: string }
+  | { status: ApiStatus.error; error: string; currentPage?: number }
   | {
       status: ApiStatus.loaded;
       users: User[];
       currentPage: number;
     };
+
+export const PATH_MATCH = "/page/:page?";
 
 export const userListSlice = createSlice({
   name: "usersApi",
@@ -58,6 +62,20 @@ export const userListSlice = createSlice({
         status: ApiStatus.error,
         error
       };
+    }
+  },
+  extraReducers: {
+    [LOCATION_CHANGE](
+      draft,
+      { payload: { location } }: PayloadAction<{ location: Location }>
+    ) {
+      const match = matchPath<{ page?: string }>(location.pathname, {
+        path: PATH_MATCH
+      });
+      if (match) {
+        draft.currentPage = Number.parseInt(match.params.page || "1");
+      }
+      console.log(match);
     }
   }
 });
@@ -85,13 +103,16 @@ export function loadUsersThunk(page: number): AppThunk {
   };
 }
 
+export function navigateTo(page: number) {
+  return push(generatePath(PATH_MATCH, { page }));
+}
+
 export const selectors = {
   status: (state: UsersState) => state.status,
   users: (state: UsersState) =>
     state.status === ApiStatus.loaded || state.status === ApiStatus.loading
       ? state.users
       : undefined,
-  page: (state: UsersState) =>
-    state.status === ApiStatus.loaded && state.currentPage,
+  page: (state: UsersState) => state.currentPage,
   error: (state: UsersState) => state.status === ApiStatus.error && state.error
 };
