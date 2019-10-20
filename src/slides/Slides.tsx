@@ -21,12 +21,10 @@ export function SlideDeck({ children }: React.PropsWithChildren<{}>) {
 
 export function Slides({
   children,
-  initialSlide = 1,
   initialOpen = false
 }: React.PropsWithChildren<{ initialSlide?: number; initialOpen?: boolean }>) {
   const [{ slide, open, totalCount }, dispatch] = useSlideState({
-    initialOpen,
-    initialSlide
+    initialOpen
   });
   useKeyboardNavigation(dispatch);
 
@@ -48,24 +46,27 @@ export function Slides({
   );
 }
 
-function useSlideState({
-  initialSlide,
-  initialOpen
-}: {
-  initialSlide: number;
-  initialOpen: boolean;
-}) {
+const STATEKEY = "__openSlide";
+
+function useSlideState({ initialOpen }: { initialOpen: boolean }) {
   return useLocalSlice({
-    initialState: { slide: initialSlide - 1, open: initialOpen, totalCount: 0 },
+    initialState: {
+      slide: Number.parseInt(window.localStorage.getItem(STATEKEY) || "0"),
+      open: initialOpen,
+      totalCount: 0
+    },
     reducers: {
       lastSlide(draft) {
         draft.slide = Math.max(0, draft.slide - 1);
+        window.localStorage.setItem(STATEKEY, String(draft.slide));
       },
       nextSlide(draft) {
         draft.slide = Math.min(draft.totalCount - 1, draft.slide + 1);
+        window.localStorage.setItem(STATEKEY, String(draft.slide));
       },
       setSlide(draft, action: PayloadAction<number>) {
         draft.slide = action.payload - 1;
+        window.localStorage.setItem(STATEKEY, String(draft.slide));
       },
       toggleOpen(draft) {
         draft.open = !draft.open;
