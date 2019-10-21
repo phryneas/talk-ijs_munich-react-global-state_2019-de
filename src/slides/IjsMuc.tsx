@@ -147,6 +147,13 @@ export function IjsMucSlideDeck() {
           * früher die beste, weil einzige Wahl (seit Mixins entfernt wurden), um Asynchronitäten gut zu managen
           `}
       </Section>
+      <Section>
+        <Title>
+          Na gut, nehmen wir einfach mal an, wir wollen wirklich nicht alles im
+          Global State halten...
+        </Title>
+        <SubTitle>Live-Coding-Time!</SubTitle>
+      </Section>
       <StateHeader label={StateLabels.appConfig} />
       <StateHeader label={StateLabels.apiCache} />
       <StateHeader label={StateLabels.uiState} />

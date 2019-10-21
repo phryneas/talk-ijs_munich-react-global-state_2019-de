@@ -2,7 +2,8 @@ import { ThunkAction } from "redux-thunk";
 import {
   configureStore,
   Action,
-  getDefaultMiddleware
+  getDefaultMiddleware,
+  combineReducers
 } from "redux-starter-kit";
 import { userListSlice, UsersState } from "./usersListApi";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
@@ -21,12 +22,12 @@ export function createStore({
   const configurationReducer = (state = { apiBase }) => state;
 
   return configureStore({
-    reducer: {
+    reducer: combineReducers({
       configuration: configurationReducer,
       usersList: userListSlice.reducer,
       newUserForm: newUserFormSlice.reducer,
-      router: connectRouter(history) as Reducer<any, any>
-    },
+      router: connectRouter(history)
+    }),
     middleware: [...getDefaultMiddleware(), routerMiddleware(history)]
   });
 }
