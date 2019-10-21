@@ -10,7 +10,7 @@ function Main({ store, history }) {
       <Wrapper>
         <App store={store} history={history} />
       </Wrapper>
-      <Slides initialOpen>
+      <Slides>
         <IjsMucSlideDeck />
       </Slides>
     </div>

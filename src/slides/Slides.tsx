@@ -19,13 +19,8 @@ export function SlideDeck({ children }: React.PropsWithChildren<{}>) {
   return <>{childArray[slide]}</>;
 }
 
-export function Slides({
-  children,
-  initialOpen = false
-}: React.PropsWithChildren<{ initialSlide?: number; initialOpen?: boolean }>) {
-  const [{ slide, open, totalCount }, dispatch] = useSlideState({
-    initialOpen
-  });
+export function Slides({ children }: React.PropsWithChildren<{}>) {
+  const [{ slide, open, totalCount }, dispatch] = useSlideState();
   useKeyboardNavigation(dispatch);
 
   return (
@@ -48,25 +43,26 @@ export function Slides({
 
 const STATEKEY = "__openSlide";
 
-function useSlideState({ initialOpen }: { initialOpen: boolean }) {
-  return useLocalSlice({
-    initialState: {
-      slide: Number.parseInt(window.localStorage.getItem(STATEKEY) || "0"),
-      open: initialOpen,
-      totalCount: 0
-    },
+const initialState = {
+  slide: 0,
+  open: true,
+  totalCount: 0
+};
+
+function useSlideState() {
+  const restoredState: typeof initialState =
+    JSON.parse(window.localStorage.getItem(STATEKEY) || "null") || initialState;
+  const slice = useLocalSlice({
+    initialState: restoredState,
     reducers: {
       lastSlide(draft) {
         draft.slide = Math.max(0, draft.slide - 1);
-        window.localStorage.setItem(STATEKEY, String(draft.slide));
       },
       nextSlide(draft) {
         draft.slide = Math.min(draft.totalCount - 1, draft.slide + 1);
-        window.localStorage.setItem(STATEKEY, String(draft.slide));
       },
       setSlide(draft, action: PayloadAction<number>) {
         draft.slide = action.payload - 1;
-        window.localStorage.setItem(STATEKEY, String(draft.slide));
       },
       toggleOpen(draft) {
         draft.open = !draft.open;
@@ -76,6 +72,13 @@ function useSlideState({ initialOpen }: { initialOpen: boolean }) {
       }
     }
   });
+
+  const state = slice[0];
+  useEffect(() => {
+    window.localStorage.setItem(STATEKEY, JSON.stringify(state));
+  }, [state]);
+
+  return slice;
 }
 
 function useKeyboardNavigation(dispatch: ReturnType<typeof useSlideState>[1]) {
