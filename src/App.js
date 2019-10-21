@@ -1,3 +1,4 @@
+//#region
 /* eslint-disable no-unused-vars */
 
 import React from "react";
@@ -12,6 +13,7 @@ import { Route, Switch, Redirect, generatePath } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { PATH_MATCH } from "./state/usersListApi";
+//#endregion
 
 export function App({ store, history }) {
   const page1Link = generatePath(PATH_MATCH, { page: 1 });

@@ -1,7 +1,9 @@
+//#region
 import { createSlice, PayloadAction } from "redux-starter-kit";
 import { AppThunk } from ".";
 import { LOCATION_CHANGE, push } from "connected-react-router";
 import { matchPath, generatePath } from "react-router";
+//#endregion
 
 export interface User {
   id: number;
@@ -11,7 +13,7 @@ export interface User {
   avatar: string;
 }
 
-interface ApiResult {
+export interface ApiResult {
   page: number;
   per_page: number;
   total: number;

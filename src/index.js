@@ -1,3 +1,4 @@
+//#region
 import React from "react";
 import ReactDOM from "react-dom";
 import Main from "./Main";
@@ -5,6 +6,7 @@ import Main from "./Main";
 import "modern-css-reset";
 import { createBrowserHistory } from "history";
 import { createStore } from "./state";
+//#endregion
 
 export const history = createBrowserHistory();
 

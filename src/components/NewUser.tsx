@@ -1,3 +1,4 @@
+//#region
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useContext } from "react";
 
@@ -21,6 +22,7 @@ const useStyles = makeStyles({
     flexDirection: "column"
   }
 });
+//#endregion
 
 export function NewUser(props: React.Props<{}>) {
   const name = useAppSelector(fromNewUserForm(select.name));

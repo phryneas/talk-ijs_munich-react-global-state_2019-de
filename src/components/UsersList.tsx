@@ -1,3 +1,4 @@
+//#region
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import React, { useEffect, useContext } from "react";
@@ -38,6 +39,7 @@ const useStyles = makeStyles({
     opacity: 0.5
   }
 });
+//#endregion
 
 export function UsersList(props: React.Props<{}>) {
   const isLoading = useAppSelector(fromUsersList(select.isLoading));

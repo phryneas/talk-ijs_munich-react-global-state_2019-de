@@ -1,13 +1,15 @@
+//#region
 import { createSlice, PayloadAction } from "redux-starter-kit";
 import { AppThunk } from ".";
 import { navigateTo as navigateToUserList } from "./usersListApi";
+//#endregion
 
 interface FormFields {
   name: string;
   job: string;
 }
 
-interface ApiResult extends FormFields {
+export interface ApiResult extends FormFields {
   id: string;
   createdAt: string;
 }
