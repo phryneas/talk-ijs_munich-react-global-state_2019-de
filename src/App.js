@@ -21,7 +21,7 @@ export function App({ store, history }) {
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <Layout
-          title="Demo"
+          title='Warum der Global State keine "eierlegende Wollmilchsau" ist'
           buttons={
             <>
               <Link to="/new">
