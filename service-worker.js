@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/talk-ijs_munich-react-global-state_2019-de/precache-manifest.b677c6293458d188192b8ba424e3c6d2.js"
+  "/talk-ijs_munich-react-global-state_2019-de/precache-manifest.d13cd70607df7ca7221c65bca73446f0.js"
 );
 
 self.addEventListener('message', (event) => {

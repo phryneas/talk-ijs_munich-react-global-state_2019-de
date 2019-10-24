@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ccbc8f89b4ce8d908f13711f8b859d7c",
+    "revision": "355592d1a479b7ac07139c44ddabd59e",
     "url": "/talk-ijs_munich-react-global-state_2019-de/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/talk-ijs_munich-react-global-state_2019-de/static/js/2.e001f677.chunk.js"
   },
   {
-    "revision": "db524637b8035c479856",
-    "url": "/talk-ijs_munich-react-global-state_2019-de/static/js/main.6956ad5c.chunk.js"
+    "revision": "6d4ca3b839ac1d8e5885",
+    "url": "/talk-ijs_munich-react-global-state_2019-de/static/js/main.57e53da7.chunk.js"
   },
   {
     "revision": "d160c229db5601c76457",
