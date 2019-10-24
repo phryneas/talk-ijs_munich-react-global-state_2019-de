@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.js": "/static/js/main.6956ad5c.chunk.js",
-    "main.js.map": "/static/js/main.6956ad5c.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.900f2d3a.js",
-    "runtime-main.js.map": "/static/js/runtime-main.900f2d3a.js.map",
-    "static/css/2.d416d538.chunk.css": "/static/css/2.d416d538.chunk.css",
-    "static/js/2.e001f677.chunk.js": "/static/js/2.e001f677.chunk.js",
-    "static/js/2.e001f677.chunk.js.map": "/static/js/2.e001f677.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.3aa68931e12d455eb9306f70fe29ecd2.js": "/precache-manifest.3aa68931e12d455eb9306f70fe29ecd2.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.d416d538.chunk.css.map": "/static/css/2.d416d538.chunk.css.map",
-    "static/media/Wollmilchsau.png": "/static/media/Wollmilchsau.f5ca656d.png",
-    "static/media/mayflower_logo_transparent.png": "/static/media/mayflower_logo_transparent.b72db429.png"
+    "main.js": "https://phryneas.github.io/talk-ijs_munich-react-global-state_2019-de/static/js/main.6956ad5c.chunk.js",
+    "main.js.map": "https://phryneas.github.io/talk-ijs_munich-react-global-state_2019-de/static/js/main.6956ad5c.chunk.js.map",
+    "runtime-main.js": "https://phryneas.github.io/talk-ijs_munich-react-global-state_2019-de/static/js/runtime-main.d5caffaa.js",
+    "runtime-main.js.map": "https://phryneas.github.io/talk-ijs_munich-react-global-state_2019-de/static/js/runtime-main.d5caffaa.js.map",
+    "static/css/2.d416d538.chunk.css": "https://phryneas.github.io/talk-ijs_munich-react-global-state_2019-de/static/css/2.d416d538.chunk.css",
+    "static/js/2.e001f677.chunk.js": "https://phryneas.github.io/talk-ijs_munich-react-global-state_2019-de/static/js/2.e001f677.chunk.js",
+    "static/js/2.e001f677.chunk.js.map": "https://phryneas.github.io/talk-ijs_munich-react-global-state_2019-de/static/js/2.e001f677.chunk.js.map",
+    "index.html": "https://phryneas.github.io/talk-ijs_munich-react-global-state_2019-de/index.html",
+    "precache-manifest.6ea2f4fac4dfe626e4bca329d78c3e8a.js": "https://phryneas.github.io/talk-ijs_munich-react-global-state_2019-de/precache-manifest.6ea2f4fac4dfe626e4bca329d78c3e8a.js",
+    "service-worker.js": "https://phryneas.github.io/talk-ijs_munich-react-global-state_2019-de/service-worker.js",
+    "static/css/2.d416d538.chunk.css.map": "https://phryneas.github.io/talk-ijs_munich-react-global-state_2019-de/static/css/2.d416d538.chunk.css.map",
+    "static/media/Wollmilchsau.png": "https://phryneas.github.io/talk-ijs_munich-react-global-state_2019-de/static/media/Wollmilchsau.f5ca656d.png",
+    "static/media/mayflower_logo_transparent.png": "https://phryneas.github.io/talk-ijs_munich-react-global-state_2019-de/static/media/mayflower_logo_transparent.b72db429.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.900f2d3a.js",
+    "static/js/runtime-main.d5caffaa.js",
     "static/css/2.d416d538.chunk.css",
     "static/js/2.e001f677.chunk.js",
     "static/js/main.6956ad5c.chunk.js"
